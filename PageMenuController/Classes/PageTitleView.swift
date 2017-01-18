@@ -39,7 +39,7 @@ class PageTitleView: UIView {
         }
     }
     
-    var unselectedBackgroundColor: UIColor = UIColor.clear {
+    var unselectedBackgroundColor: UIColor = UIColor.white {
         
         didSet {
             
@@ -91,8 +91,6 @@ class PageTitleView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = UIColor.clear
-        
         self.setupCollectionView()
         self.updateInterfaceElements()
     }
@@ -114,7 +112,11 @@ class PageTitleView: UIView {
     fileprivate func updateSelectionIndicatorWidth() {
         
         let count = self.titles?.count ?? 1
-        self.selectionIndicatorWidthConstraint.constant = count > 1 ? self.collectionView.frame.width / CGFloat(count) : 0
+        //self.selectionIndicatorWidthConstraint.constant = count > 1 ? self.collectionView.frame.width / CGFloat(count) : 0
+        self.selectionIndicatorWidthConstraint.constant = 4
+        
+        
+        
     }
     
     fileprivate func updateInterfaceElements() {
@@ -131,7 +133,11 @@ class PageTitleView: UIView {
             cell.unselectedFontColor = self.unselectedFontColor
             cell.unselectedBackgroundColor = self.unselectedBackgroundColor
         }
+       
     }
+    
+
+    
     
     func didScrollToOffset(_ offset: CGFloat, contentSize: CGFloat) {
         
@@ -139,8 +145,8 @@ class PageTitleView: UIView {
          
             let sizeRatio = self.frame.width / contentSize
             let relativeOffset = offset * sizeRatio
-            
-            self.selectionIndicatorLeadingConstraint.constant = relativeOffset
+            let cellFrame = self.collectionView.visibleCells[0].frame
+            self.selectionIndicatorLeadingConstraint.constant = relativeOffset + cellFrame.width / 2
             self.updateSelectedContent()
         }
     }
@@ -167,9 +173,19 @@ class PageTitleView: UIView {
                 
                 self.collectionView.deselectItem(at: selectedIndexPath, animated: false)
                 self.collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
+                
+                
+                
+                
             } else if self.collectionView.indexPathsForSelectedItems?.last == nil {
                 
                 self.collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
+            
+                if (indexPath.row == 0){
+                 
+                    self.selectionIndicatorLeadingConstraint.constant = 202 / 2
+                }
+                
             }
         }
     }
