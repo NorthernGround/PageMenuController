@@ -39,7 +39,7 @@ class PageTitleView: UIView {
         }
     }
     
-    var unselectedBackgroundColor: UIColor = UIColor.white {
+    var unselectedBackgroundColor: UIColor = UIColor.clear {
         
         didSet {
             
@@ -90,6 +90,8 @@ class PageTitleView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.backgroundColor = UIColor.clear
         
         self.setupCollectionView()
         self.updateInterfaceElements()

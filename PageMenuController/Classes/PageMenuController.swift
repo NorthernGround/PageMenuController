@@ -66,11 +66,11 @@ open class PageMenuController: UIViewController {
         }
     }
     
-    open var backgroundColor: UIColor = UIColor.white {
+    open var backgroundColor: UIColor = UIColor.clear {
         
         didSet {
             
-            self.pageController?.backgroundColor = backgroundColor
+            self.pageController?.backgroundColor = UIColor.clear
         }
     }
     
@@ -187,12 +187,16 @@ open class PageMenuController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         self.parent?.automaticallyAdjustsScrollViewInsets = false
         
         self.initializeInterface()
         self.updatePageContainerTopConstraint()
         self.addPageTitleView()
         self.addPageController()
+        
+        self.view.backgroundColor = UIColor.clear
     }
     
     fileprivate func initializeInterface() {
@@ -250,7 +254,7 @@ open class PageMenuController: UIViewController {
         
         let pageController = PageController()
         
-        pageController.backgroundColor = self.backgroundColor
+        pageController.backgroundColor = UIColor.clear
         pageController.bounces = self.bounces
         
         pageController.delegate = self

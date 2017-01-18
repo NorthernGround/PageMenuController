@@ -57,13 +57,13 @@ class PageController: UIViewController {
         }
     }
     
-    var backgroundColor: UIColor = UIColor.white {
+    var backgroundColor: UIColor = UIColor.clear {
         
         didSet {
             
             if self.scrollView != nil {
              
-                self.scrollView.backgroundColor = backgroundColor
+                self.scrollView.backgroundColor =  UIColor.clear
             }
         }
     }
@@ -98,11 +98,17 @@ class PageController: UIViewController {
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.scrollView.backgroundColor = self.backgroundColor
+
+    
         self.scrollView.scrollsToTop = false
         
         self.adjustForPageType()
         self.setupViewControllers()
+        
+        self.view.backgroundColor = UIColor.clear
+        self.contentView.backgroundColor = UIColor.clear
+       // self.parent!.view = UIColor.clear
+        self.scrollView.backgroundColor = UIColor.clear
     }
     
     override func viewDidLayoutSubviews() {
