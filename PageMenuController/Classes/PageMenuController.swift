@@ -285,6 +285,11 @@ open class PageMenuController: UIViewController {
         self.pageTitleView?.titles = titles
     }
     
+    open func scrollToIndex(index:Int) {
+        let i:IndexPath = IndexPath(item: index, section: 0)
+        pageController?.scrollToItemAtIndexPath(i, animated: true)
+    }
+    
     open func hideTopBar() {
         
         self.toggleTopBar(true)
